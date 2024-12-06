@@ -1,4 +1,4 @@
-package com.alicasts.december24.ui.theme
+package com.alicasts.december24.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
