@@ -3,4 +3,6 @@
     <string name="historico_de_viagens">Histórico de viagens</string>
     <string name="opces_de_viagem">Opções de viagem</string>
     <string name="solicitaco_de_viagem">Solicitação de viagem</string>
+    <string name="qualquer">Qualquer</string>
+    <string name="nulo">Null</string>
 </resources>

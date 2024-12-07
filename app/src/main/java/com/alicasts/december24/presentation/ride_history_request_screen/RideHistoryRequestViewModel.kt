@@ -6,28 +6,31 @@ import androidx.lifecycle.ViewModel
 import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPONSE
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
+import com.alicasts.december24.utils.StringProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RideHistoryRequestViewModel @Inject constructor() : ViewModel() {
+open class RideHistoryRequestViewModel @Inject constructor(
+    stringProvider: StringProvider
+) : ViewModel() {
 
     private val _userIds = MutableLiveData<List<String>>()
-    val userIds: LiveData<List<String>> = _userIds
+    open val userIds: LiveData<List<String>> = _userIds
 
     private val _driverIds = MutableLiveData<List<String>>()
-    val driverIds: LiveData<List<String>> = _driverIds
+    open val driverIds: LiveData<List<String>> = _driverIds
 
     init {
         _userIds.value = listOf(
-            "Qualquer",
+            stringProvider.getAnyString(),
             VALID_USER_ID
         )
 
         val validDriverIds = Constants.VALID_DRIVERS.map { "${it.driverId}" }
         _driverIds.value = listOf(
-            "Null",
-            "Qualquer"
+            stringProvider.getNullString(),
+            stringProvider.getAnyString()
         ) + validDriverIds
     }
 
