@@ -1,4 +1,4 @@
-package com.alicasts.december24.data.model
+package com.alicasts.december24.data.models
 
 data class Ride(
     val id: Int,
@@ -7,6 +7,6 @@ data class Ride(
     val destination: String,
     val distance: Double,
     val duration: String,
-    val historyResponseDriver: HistoryResponseDriver,
+    val driver: HistoryResponseDriver,
     val value: Double
 )

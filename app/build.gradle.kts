@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.logging.interceptor)
     kapt(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)

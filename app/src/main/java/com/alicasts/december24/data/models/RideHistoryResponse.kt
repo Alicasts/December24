@@ -1,4 +1,4 @@
-package com.alicasts.december24.data.model
+package com.alicasts.december24.data.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -29,8 +29,8 @@ fun RideHistoryRequestScreen(
     val userIds by viewModel.userIds.observeAsState(emptyList())
     val driverIds by viewModel.driverIds.observeAsState(emptyList())
 
-    var selectedUserId by remember { mutableStateOf("") }
-    var selectedDriverId by remember { mutableStateOf("") }
+    var selectedUserId by remember { mutableStateOf(userIds.first()) }
+    var selectedDriverId by remember { mutableStateOf(driverIds.first()) }
 
     Column(
         modifier = Modifier
@@ -60,9 +60,8 @@ fun RideHistoryRequestScreen(
 
         ElevatedCustomButton(
             onClick = {
-                if (selectedUserId.isNotEmpty() && selectedDriverId.isNotEmpty()) {
-                    navController.navigate("rideHistory")
-                }
+                val route = viewModel.buildRideHistoryRoute(selectedUserId, selectedDriverId)
+                navController.navigate(route = route)
             },
             text = "Submit"
         )
@@ -116,7 +115,7 @@ fun RideHistoryRequestScreenPreviewContent(
         )
 
         ElevatedCustomButton(
-            onClick = { /* Fake action */ },
+            onClick = { },
             text = "Submit"
         )
     }

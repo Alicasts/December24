@@ -1,4 +1,4 @@
-package com.alicasts.december24.common
+package com.alicasts.december24.utils
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : Resource<T>(data)

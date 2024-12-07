@@ -3,7 +3,6 @@ package com.alicasts.december24.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.navigation.compose.NavHost
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,11 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.ElevatedCustomButton
-import com.alicasts.december24.presentation.ride_history_request_screen.RideHistoryRequestScreen
+import com.alicasts.december24.presentation.navigation.AppNavHost
 import com.alicasts.december24.presentation.theme.December24Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,18 +30,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                NavHost(
+                AppNavHost(
                     navController = navController,
-                    startDestination = "home",
                     modifier = Modifier.padding(innerPadding)
-                ) {
-                    composable("home") {
-                        CenteredButtons(navController)
-                    }
-                    composable("rideHistoryRequest") {
-                        RideHistoryRequestScreen(navController)
-                    }
-                }
+                )
             }
         }
     }

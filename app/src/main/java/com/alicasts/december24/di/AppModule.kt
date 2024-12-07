@@ -1,12 +1,15 @@
 package com.alicasts.december24.di
 
-import com.alicasts.december24.common.Constants.BASE_URL
+import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
+import com.alicasts.december24.data.repository.RideHistoryRepository
+import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,7 +21,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
             .build()
     }
 
@@ -36,6 +43,14 @@ object AppModule {
     @Singleton
     fun provideRidesApi(retrofit: Retrofit): RidesApi {
         return retrofit.create(RidesApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRideHistoryRepository(
+        api: RidesApi
+    ): RideHistoryRepository {
+        return RideHistoryRepositoryImpl(api)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.alicasts.december24.data.model
+package com.alicasts.december24.data.models
 
 data class HistoryResponseDriver(
     val id: Int,

@@ -3,8 +3,9 @@ package com.alicasts.december24.presentation.ride_history_request_screen
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alicasts.december24.common.Constants
-import com.alicasts.december24.common.Constants.VALID_USER_ID
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPONSE
+import com.alicasts.december24.utils.Constants
+import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -19,7 +20,6 @@ class RideHistoryRequestViewModel @Inject constructor() : ViewModel() {
 
     init {
         _userIds.value = listOf(
-            "Null",
             "Qualquer",
             VALID_USER_ID
         )
@@ -29,5 +29,14 @@ class RideHistoryRequestViewModel @Inject constructor() : ViewModel() {
             "Null",
             "Qualquer"
         ) + validDriverIds
+    }
+
+    fun buildRideHistoryRoute(customerId: String, driverId: String?): String {
+        return buildString {
+            append("$RIDE_HISTORY_RESPONSE/$customerId")
+            if (!driverId.isNullOrEmpty() && driverId != "Null") {
+                append("?driver_id=$driverId")
+            }
+        }
     }
 }
