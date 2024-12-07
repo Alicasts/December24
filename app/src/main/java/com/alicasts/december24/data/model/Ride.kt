@@ -7,6 +7,6 @@ data class Ride(
     val destination: String,
     val distance: Double,
     val duration: String,
-    val driver: Driver,
+    val historyResponseDriver: HistoryResponseDriver,
     val value: Double
 )

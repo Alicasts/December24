@@ -1,5 +1,6 @@
 package com.alicasts.december24.di
 
+import com.alicasts.december24.common.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
 import dagger.Module
 import dagger.Provides
@@ -25,7 +26,7 @@ object AppModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://xd5zl5kk2yltomvw5fb37y3bm40vsyrx.lambda-url.sa-east-1.on.aws/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
