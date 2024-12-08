@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.navigation.testing)
+    implementation(libs.coil.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.android.maps.utils)
     kapt(libs.hilt.android.compiler)
 
     testImplementation(libs.junit)

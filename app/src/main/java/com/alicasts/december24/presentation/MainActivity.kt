@@ -20,6 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.ElevatedCustomButton
 import com.alicasts.december24.presentation.navigation.AppNavHost
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_REQUEST
+import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_REQUEST
 import com.alicasts.december24.presentation.theme.December24Theme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,13 +52,10 @@ fun CenteredButtons(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ElevatedCustomButton(
-                onClick = { navController.navigate("rideHistoryRequest") },
+                onClick = { navController.navigate( RIDE_HISTORY_REQUEST ) },
                 text = stringResource(R.string.historico_de_viagens))
             ElevatedCustomButton(
-                onClick = { },
-                text = stringResource(R.string.opces_de_viagem))
-            ElevatedCustomButton(
-                onClick = { },
+                onClick = { navController.navigate( TRAVEL_REQUEST ) },
                 text = stringResource(R.string.solicitaco_de_viagem))
         }
     }

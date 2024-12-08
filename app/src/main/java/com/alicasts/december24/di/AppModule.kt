@@ -4,6 +4,8 @@ import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
 import com.alicasts.december24.data.repository.RideHistoryRepository
 import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
+import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.data.repository.TravelOptionsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,6 +53,14 @@ object AppModule {
         api: RidesApi
     ): RideHistoryRepository {
         return RideHistoryRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTravelOptionsRepository(
+        api: RidesApi
+    ): TravelOptionsRepository {
+        return TravelOptionsRepositoryImpl(api)
     }
 
 }
