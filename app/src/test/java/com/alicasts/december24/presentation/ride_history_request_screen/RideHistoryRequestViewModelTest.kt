@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
-import com.alicasts.december24.utils.StringProvider
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule

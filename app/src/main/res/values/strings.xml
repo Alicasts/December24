@@ -1,8 +1,28 @@
 <resources>
     <string name="app_name">December 24</string>
-    <string name="historico_de_viagens">Histórico de viagens</string>
-    <string name="opces_de_viagem">Opções de viagem</string>
-    <string name="solicitaco_de_viagem">Solicitação de viagem</string>
-    <string name="qualquer">Qualquer</string>
-    <string name="nulo">Null</string>
+    <string name="request_ride_history">Histórico de viagens</string>
+    <string name="travel_options">Opções de viagem</string>
+    <string name="travel_request">Solicitação de Viagem</string>
+    <string name="select_user_id">Selecione o ID do Usuário</string>
+    <string name="select_driver_id">Selecione o Driver ID</string>
+    <string name="select_origin_address">Selecione o Endereço de Origem</string>
+    <string name="select_destination_address">Selecione o Endereço de Destino</string>
+    <string name="submit">Enviar</string>
+    <string name="null_string">Null</string>
+    <string name="any_string">Qualquer</string>
+    <string name="unknown_error">Erro desconhecido</string>
+    <string name="local_message">"Local Message: "</string>
+    <string name="no_ride_history_available">Sem histórico de corridas disponível.</string>
+    <string name="successful_empty_response">"API retornou 200, porém sem elementos. "</string>
+    <string name="vehicle">Veículo</string>
+    <string name="evaluation">Avaliação</string>
+    <string name="evaluation_stars">Estrela de avaliação</string>
+    <string name="price_prefix">Valor: R$</string>
+    <string name="date_label">Data</string>
+    <string name="origin_label">Origem</string>
+    <string name="destination_label">Destino</string>
+    <string name="driver_name_label">Nome do motorista</string>
+    <string name="driver_id_label">ID do motorista</string>
+    <string name="static_map_description">Mapa estático com rota</string>
+    <string name="successful_response_no_drivers">A solicitação foi bem-sucedida, mas no momento não há motoristas disponíveis para essa rota.</string>
 </resources>

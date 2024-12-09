@@ -16,8 +16,8 @@ object Constants {
 
     val VALID_ADDRESSES = listOf(
         "Av. Pres. Kenedy, 2385 - Remédios, Osasco - SP, 02675-031",
-        "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200",
         "Av. Thomas Edison, 365 - Barra Funda, São Paulo - SP, 01140-000",
-        "Av. Brasil, 2033 - Jardim America, São Paulo - SP, 01431-001"
+        "Av. Brasil, 2033 - Jardim America, São Paulo - SP, 01431-001",
+        "Av. Paulista, 1538 - Bela Vista, São Paulo - SP, 01310-200"
     )
 }

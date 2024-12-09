@@ -6,7 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alicasts.december24.data.models.Location
+import com.alicasts.december24.data.models.TravelResponse
 import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.utils.Resource
 import com.alicasts.december24.utils.Secrets.MAPBOX_API_KEY
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.PolyUtil
@@ -17,15 +19,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TravelOptionsViewModel @Inject constructor(
-    private val repository: TravelOptionsRepository
+    private val repository: TravelOptionsRepository,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(TravelOptionsState())
-    val state: LiveData<TravelOptionsState> = _state
+    private val _state = MutableLiveData<Resource<TravelResponse>>()
+    val state: LiveData<Resource<TravelResponse>> = _state
 
     fun fetchTravelOptions(json: String) {
         viewModelScope.launch {
-            _state.value = _state.value?.copy(isLoading = true)
+            _state.value = Resource.Loading()
 
             try {
                 val jsonObject = JSONObject(json)
@@ -34,10 +36,10 @@ class TravelOptionsViewModel @Inject constructor(
                 val destination = jsonObject.getString("destination")
 
                 val travelResponse = repository.getTravelOptions(customerId, origin, destination)
-                _state.value = TravelOptionsState(travelResponse = travelResponse)
+                _state.value = Resource.Success(travelResponse)
             } catch (e: Exception) {
                 e.printStackTrace()
-                _state.value = e.message?.let { TravelOptionsState(error = it) }
+                _state.value = e.message?.let { Resource.Error(it) }
             }
         }
     }

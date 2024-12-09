@@ -59,7 +59,7 @@ fun AppNavHost(
             )
         ) { backStackEntry ->
             val json = backStackEntry.arguments?.getString("json") ?: "{}"
-            TravelOptionsScreen(json = json)
+            TravelOptionsScreen(requestJsonAsString = json)
         }
     }
 }

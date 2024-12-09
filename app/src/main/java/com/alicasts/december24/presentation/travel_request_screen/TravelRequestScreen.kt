@@ -14,9 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.DropdownMenuField
 import com.alicasts.december24.presentation.components.ElevatedCustomButton
 
@@ -27,6 +29,12 @@ fun TravelRequestScreen(
 ) {
     val userIds by viewModel.userIds.observeAsState(emptyList())
     val addresses by viewModel.addresses.observeAsState(emptyList())
+
+    val travelRequestString = stringResource(R.string.travel_request)
+    val selectUserIdString = stringResource(R.string.select_user_id)
+    val selectOriginAddressString = stringResource(R.string.select_origin_address)
+    val selectDestinationAddressString = stringResource(R.string.select_destination_address)
+    val submitString = stringResource(R.string.submit)
 
     var selectedUserId by remember { mutableStateOf(userIds.first()) }
     var selectedOrigin by remember { mutableStateOf(addresses.first()) }
@@ -40,26 +48,26 @@ fun TravelRequestScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Solicitação de Viagem",
+            text = travelRequestString,
             style = MaterialTheme.typography.headlineMedium
         )
 
         DropdownMenuField(
-            label = "Selecione o ID do Usuário",
+            label = selectUserIdString,
             options = userIds,
             selectedOption = selectedUserId,
             onOptionSelected = { selectedUserId = it }
         )
 
         DropdownMenuField(
-            label = "Selecione o Endereço de Origem",
+            label = selectOriginAddressString,
             options = addresses,
             selectedOption = selectedOrigin,
             onOptionSelected = { selectedOrigin = it }
         )
 
         DropdownMenuField(
-            label = "Selecione o Endereço de Destino",
+            label = selectDestinationAddressString,
             options = addresses,
             selectedOption = selectedDestination,
             onOptionSelected = { selectedDestination = it }
@@ -74,7 +82,7 @@ fun TravelRequestScreen(
                 )
                 navController.navigate(route)
             },
-            text = "Submit"
+            text = submitString
         )
     }
 }

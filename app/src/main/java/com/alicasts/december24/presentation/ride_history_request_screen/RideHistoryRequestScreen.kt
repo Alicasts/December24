@@ -14,12 +14,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.DropdownMenuField
 import com.alicasts.december24.presentation.components.ElevatedCustomButton
+import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
+import com.alicasts.december24.utils.StringResourceProvider
 
 @Composable
 fun RideHistoryRequestScreen(
@@ -32,6 +38,11 @@ fun RideHistoryRequestScreen(
     var selectedUserId by remember { mutableStateOf(userIds.first()) }
     var selectedDriverId by remember { mutableStateOf(driverIds.first()) }
 
+    val requestRideHistoryString = stringResource(R.string.request_ride_history)
+    val selectUseIdString = stringResource(R.string.select_user_id)
+    val selectedDriverIdString = stringResource(R.string.select_driver_id)
+    val submitString = stringResource(R.string.submit)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -40,19 +51,19 @@ fun RideHistoryRequestScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Request Ride History",
+            text = requestRideHistoryString,
             style = MaterialTheme.typography.headlineMedium
         )
 
         DropdownMenuField(
-            label = "Select User ID",
+            label = selectUseIdString,
             options = userIds,
             selectedOption = selectedUserId,
             onOptionSelected = { selectedUserId = it }
         )
 
         DropdownMenuField(
-            label = "Select Driver ID",
+            label = selectedDriverIdString,
             options = driverIds,
             selectedOption = selectedDriverId,
             onOptionSelected = { selectedDriverId = it }
@@ -63,7 +74,7 @@ fun RideHistoryRequestScreen(
                 val route = viewModel.buildRideHistoryRoute(selectedUserId, selectedDriverId)
                 navController.navigate(route = route)
             },
-            text = "Submit"
+            text = submitString
         )
     }
 }
@@ -71,52 +82,14 @@ fun RideHistoryRequestScreen(
 @Preview(showBackground = true)
 @Composable
 fun RideHistoryRequestScreenPreview() {
-    val mockUserIds = listOf("Null", "Qualquer", "CT01")
-    val mockDriverIds = listOf("Null", "Qualquer", "1", "2", "3")
-
-    RideHistoryRequestScreenPreviewContent(
-        userIds = mockUserIds,
-        driverIds = mockDriverIds
-    )
-}
-
-@Composable
-fun RideHistoryRequestScreenPreviewContent(
-    userIds: List<String>,
-    driverIds: List<String>
-) {
-    var selectedUserId by remember { mutableStateOf(userIds.first()) }
-    var selectedDriverId by remember { mutableStateOf(driverIds.first()) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Request Ride History",
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        DropdownMenuField(
-            label = "Select User ID",
-            options = userIds,
-            selectedOption = selectedUserId,
-            onOptionSelected = { selectedUserId = it }
-        )
-
-        DropdownMenuField(
-            label = "Select Driver ID",
-            options = driverIds,
-            selectedOption = selectedDriverId,
-            onOptionSelected = { selectedDriverId = it }
-        )
-
-        ElevatedCustomButton(
-            onClick = { },
-            text = "Submit"
-        )
+    val fakeNavController = rememberNavController()
+    val fakeViewModel = object : RideHistoryRequestViewModel(FakeStringResourceProvider()) {
+        override val userIds = MutableLiveData(listOf("User1", "User2"))
+        override val driverIds = MutableLiveData(listOf("Driver1", "Driver2"))
     }
+
+    RideHistoryRequestScreen(
+        navController = fakeNavController,
+        viewModel = fakeViewModel
+    )
 }

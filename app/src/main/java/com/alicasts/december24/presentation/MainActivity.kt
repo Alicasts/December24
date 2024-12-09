@@ -53,10 +53,10 @@ fun CenteredButtons(navController: NavController) {
         ) {
             ElevatedCustomButton(
                 onClick = { navController.navigate( RIDE_HISTORY_REQUEST ) },
-                text = stringResource(R.string.historico_de_viagens))
+                text = stringResource(R.string.request_ride_history))
             ElevatedCustomButton(
                 onClick = { navController.navigate( TRAVEL_REQUEST ) },
-                text = stringResource(R.string.solicitaco_de_viagem))
+                text = stringResource(R.string.travel_request))
         }
     }
 }
