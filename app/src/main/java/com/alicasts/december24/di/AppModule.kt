@@ -1,12 +1,18 @@
 package com.alicasts.december24.di
 
+import android.content.Context
 import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
 import com.alicasts.december24.data.repository.RideHistoryRepository
 import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
+import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.data.repository.TravelOptionsRepositoryImpl
+import com.alicasts.december24.utils.DefaultStringResourceProvider
+import com.alicasts.december24.utils.StringResourceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -51,6 +57,22 @@ object AppModule {
         api: RidesApi
     ): RideHistoryRepository {
         return RideHistoryRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTravelOptionsRepository(
+        api: RidesApi
+    ): TravelOptionsRepository {
+        return TravelOptionsRepositoryImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun provideStringResourceProvider(
+        @ApplicationContext context: Context
+    ): StringResourceProvider {
+        return DefaultStringResourceProvider(context)
     }
 
 }
