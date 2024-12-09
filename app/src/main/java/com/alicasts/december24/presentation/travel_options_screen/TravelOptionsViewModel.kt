@@ -30,11 +30,7 @@ class TravelOptionsViewModel @Inject constructor(
             _state.value = Resource.Loading()
 
             try {
-                val jsonObject = JSONObject(json)
-                val customerId = jsonObject.getString("customer_id")
-                val origin = jsonObject.getString("origin")
-                val destination = jsonObject.getString("destination")
-
+                val (customerId, origin, destination) = parseJson(json)
                 val travelResponse = repository.getTravelOptions(customerId, origin, destination)
                 _state.value = Resource.Success(travelResponse)
             } catch (e: Exception) {
@@ -42,6 +38,14 @@ class TravelOptionsViewModel @Inject constructor(
                 _state.value = e.message?.let { Resource.Error(it) }
             }
         }
+    }
+
+    private fun parseJson(json: String): Triple<String, String, String> {
+        val jsonObject = JSONObject(json)
+        val customerId = jsonObject.getString("customer_id")
+        val origin = jsonObject.getString("origin")
+        val destination = jsonObject.getString("destination")
+        return Triple(customerId, origin, destination)
     }
 
     fun buildStaticMapUrl(origin: Location, destination: Location): String {

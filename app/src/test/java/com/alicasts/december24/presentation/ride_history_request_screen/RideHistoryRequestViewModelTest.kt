@@ -2,6 +2,8 @@ package com.alicasts.december24.presentation.ride_history_request_screen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPONSE
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import org.junit.Assert.*
@@ -19,8 +21,8 @@ class RideHistoryRequestViewModelTest {
 
     @Before
     fun setUp() {
-        val stringProvider = StringProvider("Qualquer", "Null")
-        viewModel = RideHistoryRequestViewModel(stringProvider)
+        val fakeStringResourceProvider = FakeStringResourceProvider()
+        viewModel = RideHistoryRequestViewModel(fakeStringResourceProvider)
     }
 
     @Test
@@ -43,5 +45,35 @@ class RideHistoryRequestViewModelTest {
 
         assertEquals(expectedDriverIds, viewModel.driverIds.value)
         viewModel.driverIds.removeObserver(observer)
+    }
+
+    @Test
+    fun `buildRideHistoryRoute should append driver_id when provided`() {
+        val customerId = "CT01"
+        val driverId = "Driver123"
+
+        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+
+        assertEquals("$RIDE_HISTORY_RESPONSE/$customerId?driver_id=$driverId", result)
+    }
+
+    @Test
+    fun `buildRideHistoryRoute should not append driver_id when null`() {
+        val customerId = "CT01"
+        val driverId = null
+
+        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+
+        assertEquals("$RIDE_HISTORY_RESPONSE/$customerId", result)
+    }
+
+    @Test
+    fun `buildRideHistoryRoute should not append driver_id when Null string`() {
+        val customerId = "CT01"
+        val driverId = "Null"
+
+        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+
+        assertEquals("$RIDE_HISTORY_RESPONSE/$customerId", result)
     }
 }
