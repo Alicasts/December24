@@ -8,6 +8,7 @@ import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPO
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import com.alicasts.december24.utils.StringResourceProvider
+import com.alicasts.december24.utils.Utils.buildRideHistoryRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -45,12 +46,7 @@ open class RideHistoryRequestViewModel @Inject constructor(
         ) + validDriverIds
     }
 
-    fun buildRideHistoryRoute(customerId: String, driverId: String?): String {
-        return buildString {
-            append("$RIDE_HISTORY_RESPONSE/$customerId")
-            if (!driverId.isNullOrEmpty() && driverId != nullString) {
-                append("?driver_id=$driverId")
-            }
-        }
+    fun returnRideHistoryRoute(customerId: String, driverId: String?): String {
+        return buildRideHistoryRoute(customerId = customerId, driverId = driverId, nullString = nullString)
     }
 }

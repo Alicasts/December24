@@ -25,4 +25,6 @@
     <string name="driver_id_label">ID do motorista</string>
     <string name="static_map_description">Mapa estático com rota</string>
     <string name="successful_response_no_drivers">A solicitação foi bem-sucedida, mas no momento não há motoristas disponíveis para essa rota.</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
 </resources>

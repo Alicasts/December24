@@ -71,7 +71,7 @@ fun RideHistoryRequestScreen(
 
         ElevatedCustomButton(
             onClick = {
-                val route = viewModel.buildRideHistoryRoute(selectedUserId, selectedDriverId)
+                val route = viewModel.returnRideHistoryRoute(selectedUserId, selectedDriverId)
                 navController.navigate(route = route)
             },
             text = submitString
