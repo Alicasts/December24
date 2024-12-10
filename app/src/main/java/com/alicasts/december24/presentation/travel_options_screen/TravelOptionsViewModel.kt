@@ -1,19 +1,23 @@
 package com.alicasts.december24.presentation.travel_options_screen
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alicasts.december24.R
 import com.alicasts.december24.data.models.ConfirmRideResponse
 import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.Location
 import com.alicasts.december24.data.models.TravelRequest
 import com.alicasts.december24.data.models.TravelResponse
 import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
+import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
+import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
 import com.alicasts.december24.utils.Resource
 import com.alicasts.december24.utils.Secrets.MAPBOX_API_KEY
+import com.alicasts.december24.utils.StringResourceProvider
 import com.alicasts.december24.utils.Utils.buildRideHistoryRoute
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.PolyUtil
@@ -23,8 +27,9 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
-class TravelOptionsViewModel @Inject constructor(
+open class TravelOptionsViewModel @Inject constructor(
     private val repository: TravelOptionsRepository,
+    stringResourceProvider: StringResourceProvider
 ) : ViewModel() {
 
     private val _travelRequest = MutableLiveData<TravelRequest>()
@@ -35,6 +40,8 @@ class TravelOptionsViewModel @Inject constructor(
 
     private val _submitState = MutableLiveData<Resource<ConfirmRideResponse>?>()
     val submitState: LiveData<Resource<ConfirmRideResponse>?> = _submitState
+
+    private val unknownErrorMessage = stringResourceProvider.getString(R.string.unknown_error)
 
     fun fetchTravelOptions(jsonAsString: String) {
         viewModelScope.launch {
@@ -54,9 +61,9 @@ class TravelOptionsViewModel @Inject constructor(
         try {
             val jsonObject = JSONObject(Uri.decode(json))
             val travelRequest = TravelRequest(
-                customerId = jsonObject.optString("customer_id", "Unknown"),
-                origin = jsonObject.optString("origin", "Unknown"),
-                destination = jsonObject.optString("destination", "Unknown")
+                customerId = jsonObject.optString(CUSTOMER_ID),
+                origin = jsonObject.optString(ORIGIN),
+                destination = jsonObject.optString(DESTINATION)
             )
             _travelRequest.value = travelRequest
         } catch (e: Exception) {
@@ -83,7 +90,7 @@ class TravelOptionsViewModel @Inject constructor(
                 )
                 _submitState.value = Resource.Success(response)
             } catch (e: Exception) {
-                _submitState.value = Resource.Error(e.message ?: "Unknown error")
+                _submitState.value = Resource.Error(e.message ?: unknownErrorMessage)
             }
         }
     }
@@ -105,8 +112,7 @@ class TravelOptionsViewModel @Inject constructor(
                 append("?access_token=$MAPBOX_API_KEY")
             }
         } catch (e: Exception) {
-            Log.e("StaticMap", "Error generating Mapbox URL: ${e.message}")
-            ""
+            e.message ?: ""
         }
     }
 

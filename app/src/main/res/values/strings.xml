@@ -25,6 +25,11 @@
     <string name="driver_id_label">ID do motorista</string>
     <string name="static_map_description">Mapa estático com rota</string>
     <string name="successful_response_no_drivers">A solicitação foi bem-sucedida, mas no momento não há motoristas disponíveis para essa rota.</string>
-    <string name="confirm">Confirmar</string>
+    <string name="confirm_trip">Confirmar viagem</string>
     <string name="cancel">Cancelar</string>
+    <string name="distance_label">Distância</string>
+    <string name="duration_label">Duração</string>
+    <string name="ride_confirmed_successfully">Corrida confirmada com sucesso!</string>
+    <string name="error_description">error_description</string>
+    <string name="error_parsing_error_response">Error parsing error response</string>
 </resources>

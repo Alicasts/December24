@@ -27,11 +27,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
             .build()
     }
 
@@ -54,9 +50,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRideHistoryRepository(
-        api: RidesApi
+        api: RidesApi,
+        stringResourceProvider: StringResourceProvider
     ): RideHistoryRepository {
-        return RideHistoryRepositoryImpl(api)
+        return RideHistoryRepositoryImpl(api, stringResourceProvider)
     }
 
     @Provides

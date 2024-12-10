@@ -6,6 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alicasts.december24.R
 import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_OPTIONS
+import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
+import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
+import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
 import com.alicasts.december24.utils.Constants.VALID_ADDRESSES
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import com.alicasts.december24.utils.StringResourceProvider
@@ -47,9 +50,9 @@ class TravelRequestViewModel @Inject constructor(
         destination: String
     ): String {
         val json = JSONObject().apply {
-            put("customer_id", if (userId == nullString) null else userId)
-            put("origin", if (origin == nullString) null else origin)
-            put("destination", if (destination == nullString) null else destination)
+            put(CUSTOMER_ID, if (userId == nullString) null else userId)
+            put(ORIGIN, if (origin == nullString) null else origin)
+            put(DESTINATION, if (destination == nullString) null else destination)
         }.toString()
 
         return buildString {

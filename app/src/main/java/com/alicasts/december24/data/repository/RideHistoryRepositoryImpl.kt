@@ -1,23 +1,32 @@
 package com.alicasts.december24.data.repository
 
+import com.alicasts.december24.R
 import com.alicasts.december24.data.models.HistoryResponseDriver
 import com.alicasts.december24.data.models.Ride
 import com.alicasts.december24.data.models.RideHistoryResponse
 import com.alicasts.december24.data.remote.RidesApi
+import com.alicasts.december24.presentation.navigation.RoutesArguments.DRIVER_ID
+import com.alicasts.december24.presentation.navigation.RoutesArguments.RIDE
+import com.alicasts.december24.utils.StringResourceProvider
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
 class RideHistoryRepositoryImpl @Inject constructor(
-    private val api: RidesApi
+    private val api: RidesApi,
+    stringResourceProvider: StringResourceProvider
 ) : RideHistoryRepository {
+
+    private val unknownErrorMessage = stringResourceProvider.getString(R.string.unknown_error)
+    private val errorDescription = stringResourceProvider.getString(R.string.error_description)
+    private val errorParsingTheResponseMessage = stringResourceProvider.getString(R.string.error_parsing_error_response)
 
     override suspend fun getRideHistory(customerId: String, driverId: String): List<Ride> {
         val route = buildString {
-            append("ride/$customerId")
+            append("$RIDE/$customerId")
             if (driverId.isNotBlank()) {
-                append("?driver_id=$driverId")
+                append("?$DRIVER_ID=$driverId")
             }
         }
         return try {
@@ -28,19 +37,19 @@ class RideHistoryRepositoryImpl @Inject constructor(
             val errorMessage = extractErrorDescription(errorResponse)
             throw Exception(errorMessage)
         } catch (e: Exception) {
-            throw Exception("An unexpected error occurred.")
+            throw Exception(unknownErrorMessage)
         }
     }
 
     private fun extractErrorDescription(errorResponse: String?): String {
         return try {
             if (!errorResponse.isNullOrEmpty()) {
-                JSONObject(errorResponse).optString("error_description", "Unknown error")
+                JSONObject(errorResponse).optString(errorDescription)
             } else {
-                "Unknown error"
+                unknownErrorMessage
             }
         } catch (e: JSONException) {
-            "Error parsing error response"
+            errorParsingTheResponseMessage
         }
     }
 

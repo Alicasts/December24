@@ -1,9 +1,10 @@
 package com.alicasts.december24.data.models
 
+import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
 import com.google.gson.annotations.SerializedName
 
 data class ConfirmRideRequest(
-    @SerializedName("customer_id")
+    @SerializedName(CUSTOMER_ID)
     val customerId: String,
     val origin: String,
     val destination: String,

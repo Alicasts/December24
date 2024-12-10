@@ -25,11 +25,11 @@ fun RideHistoryResponseScreen(
     driverId: String,
     viewModel: RideHistoryResponseViewModel = hiltViewModel()
 ) {
-
-    val rideHistory by viewModel.rideHistory.observeAsState()
-            LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) {
         viewModel.fetchRideHistory(customerId, driverId)
     }
+
+    val rideHistory by viewModel.rideHistory.observeAsState()
 
     val localMessageString = stringResource(R.string.local_message)
     val unknownErrorString = stringResource(R.string.unknown_error)

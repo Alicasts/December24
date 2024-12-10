@@ -33,10 +33,10 @@ fun DriverOptionCard(
     isSelected: Boolean,
     onSelected: (DriverOption) -> Unit
 ) {
-    val vehicleString = stringResource(R.string.vehicle)
-    val evaluationString = stringResource(R.string.evaluation)
-    val evaluationStarsString = stringResource(R.string.evaluation_stars)
-    val pricePrefixString = stringResource(R.string.price_prefix)
+    val vehicleLabel = stringResource(R.string.vehicle)
+    val evaluationLabel = stringResource(R.string.evaluation)
+    val evaluationStarsDescription = stringResource(R.string.evaluation_stars)
+    val pricePrefixLabel = stringResource(R.string.price_prefix)
 
     Card(
         modifier = Modifier
@@ -71,7 +71,7 @@ fun DriverOptionCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "$vehicleString: " + driverOption.vehicle,
+                text = "$vehicleLabel: " + driverOption.vehicle,
                 style = MaterialTheme.typography.bodyMedium
             )
 
@@ -82,13 +82,13 @@ fun DriverOptionCard(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
-                    text = "$evaluationString: ",
+                    text = "$evaluationLabel: ",
                     style = MaterialTheme.typography.bodyMedium
                 )
                 repeat(driverOption.review.rating) {
                     Icon(
                         imageVector = Icons.Default.Star,
-                        contentDescription = evaluationStarsString,
+                        contentDescription = evaluationStarsDescription,
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -97,7 +97,7 @@ fun DriverOptionCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = pricePrefixString + driverOption.value,
+                text = pricePrefixLabel + driverOption.value,
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.Bold
             )

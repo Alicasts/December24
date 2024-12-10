@@ -6,6 +6,9 @@ import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.HistoryResponseDriver
 import com.alicasts.december24.data.models.TravelResponse
 import com.alicasts.december24.data.remote.RidesApi
+import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
+import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
+import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
@@ -34,17 +37,17 @@ class TravelOptionsRepositoryImpl @Inject constructor(
 
     private fun parseTravelOptionsRequestJson(json: String): Triple<String, String, String> {
         val jsonObject = JSONObject(json)
-        val customerId = jsonObject.getString("customer_id")
-        val origin = jsonObject.getString("origin")
-        val destination = jsonObject.getString("destination")
+        val customerId = jsonObject.getString(CUSTOMER_ID)
+        val origin = jsonObject.getString(ORIGIN)
+        val destination = jsonObject.getString(DESTINATION)
         return Triple(customerId, origin, destination)
     }
 
     private fun buildRequestBody(customerId: String, origin: String, destination: String): Map<String, String> {
         return mapOf(
-            "customer_id" to customerId,
-            "origin" to origin,
-            "destination" to destination
+            CUSTOMER_ID to customerId,
+            ORIGIN to origin,
+            DESTINATION to destination
         )
     }
 
