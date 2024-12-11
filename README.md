@@ -1,5 +1,6 @@
 **This is a travel management app developed as part of a code challenge.
-It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.**
+It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.
+As part of this project, I utilized my knowledge of agile methodologies to organize the development process effectively. I created a Kanban board, implemented a ticket system, and drafted a basic documentation structure on Trello to manage tasks and workflows efficiently. You can view the Trello board here: (link available after the time deadline)**
 
 ![Demo](docs/DemoGif.gif)
 
@@ -42,3 +43,9 @@ app/
 ├── di/                  # Dependency Injection (AppModule)  
 ├── presentation/        # Screens, ViewModels, and components  
 ├── utils/               # Utility functions and classes
+
+**Final Notes and Personal Considerations**
+
+* Since I'm not experienced with Jetpack Compose UI yet, I only developed the basics and did not include Instrumented Tests.
+* This project was developed as part of a code challenge.
+* Feedback and suggestions are welcome!
