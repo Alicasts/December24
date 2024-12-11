@@ -24,7 +24,7 @@ import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.Review
 
 @Composable
-fun ConfirmTravelPopup(
+fun ConfirmRidePopup(
     driverOption: DriverOption,
     onDismiss: () -> Unit,
     onConfirm: (DriverOption) -> Unit
@@ -99,9 +99,9 @@ fun ConfirmTravelPopup(
 
 @Preview(showBackground = true)
 @Composable
-fun ConfirmTravelPopupPreview() {
+fun ConfirmRidePopupPreview() {
     MaterialTheme {
-        ConfirmTravelPopup(
+        ConfirmRidePopup(
             driverOption = DriverOption(
                 id = 1,
                 name = "John Doe",

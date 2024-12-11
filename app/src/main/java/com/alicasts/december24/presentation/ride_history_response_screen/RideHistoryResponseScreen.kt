@@ -16,7 +16,7 @@ import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.EmptyStateMessage
 import com.alicasts.december24.presentation.components.ErrorMessage
 import com.alicasts.december24.presentation.components.LoadingIndicator
-import com.alicasts.december24.presentation.components.RideItem
+import com.alicasts.december24.presentation.components.RideHistoryItem
 import com.alicasts.december24.utils.Resource
 
 @Composable
@@ -58,7 +58,7 @@ fun RideHistoryResponseScreen(
                     contentPadding = PaddingValues(16.dp)
                 ) {
                     items(state.data) { ride ->
-                        RideItem(ride)
+                        RideHistoryItem(ride)
                     }
                 }
             }

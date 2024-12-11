@@ -1,4 +1,4 @@
-package com.alicasts.december24.presentation.travel_options_screen
+package com.alicasts.december24.presentation.ride_options_screen
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
@@ -13,20 +13,20 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alicasts.december24.R
 import com.alicasts.december24.data.models.DriverOption
-import com.alicasts.december24.presentation.components.ConfirmTravelPopup
+import com.alicasts.december24.presentation.components.ConfirmRidePopup
 import com.alicasts.december24.presentation.components.ErrorMessage
 import com.alicasts.december24.presentation.components.LoadingIndicator
-import com.alicasts.december24.presentation.components.TravelOptionsContent
+import com.alicasts.december24.presentation.components.RideOptionsContent
 import com.alicasts.december24.utils.Resource
 
 
 @Composable
-fun TravelOptionsScreen(
+fun RideOptionsScreen(
     navController: NavController,
     requestJsonAsString: String,
-    viewModel: TravelOptionsViewModel = hiltViewModel()
+    viewModel: RideOptionsViewModel = hiltViewModel()
 ) {
-    val travelRequest by viewModel.travelRequest.observeAsState()
+    val rideRequest by viewModel.rideRequest.observeAsState()
     val state by viewModel.state.observeAsState()
     val submitState by viewModel.submitState.observeAsState()
 
@@ -37,8 +37,8 @@ fun TravelOptionsScreen(
     val (selectedDriverOption, setSelectedDriverOption) = remember { mutableStateOf<DriverOption?>(null) }
 
     LaunchedEffect(Unit) {
-        viewModel.parseTravelRequest(requestJsonAsString)
-        viewModel.fetchTravelOptions(requestJsonAsString)
+        viewModel.parseRideRequest(requestJsonAsString)
+        viewModel.fetchRideOptions(requestJsonAsString)
     }
 
     when (state) {
@@ -46,10 +46,10 @@ fun TravelOptionsScreen(
         is Resource.Error -> ErrorMessage((state as Resource.Error).message ?: unknownErrorString)
         is Resource.Success -> {
             val response = (state as Resource.Success).data!!
-            TravelOptionsContent(
+            RideOptionsContent(
                 response = response,
-                origin = travelRequest?.origin.orEmpty(),
-                destination = travelRequest?.destination.orEmpty(),
+                origin = rideRequest?.origin.orEmpty(),
+                destination = rideRequest?.destination.orEmpty(),
                 onOptionSelected = setSelectedDriverOption
             )
         }
@@ -68,7 +68,7 @@ fun TravelOptionsScreen(
                         successfulRideMessage,
                         Toast.LENGTH_LONG
                     ).show()
-                    viewModel.returnTravelHistoryRoute(nullString)?.let { route ->
+                    viewModel.returnRideHistoryRoute(nullString)?.let { route ->
                         navController.navigate(route)
                         hasNavigated.value = true
                         viewModel.resetSubmitState()
@@ -87,7 +87,7 @@ fun TravelOptionsScreen(
     }
 
     selectedDriverOption?.let {
-        ConfirmTravelPopup(
+        ConfirmRidePopup(
             driverOption = it,
             onDismiss = { setSelectedDriverOption(null) },
             onConfirm = { confirmedDriver ->

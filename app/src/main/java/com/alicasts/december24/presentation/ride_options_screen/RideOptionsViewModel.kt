@@ -1,4 +1,4 @@
-package com.alicasts.december24.presentation.travel_options_screen
+package com.alicasts.december24.presentation.ride_options_screen
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
@@ -9,9 +9,9 @@ import com.alicasts.december24.R
 import com.alicasts.december24.data.models.ConfirmRideResponse
 import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.Location
-import com.alicasts.december24.data.models.TravelRequest
-import com.alicasts.december24.data.models.TravelResponse
-import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.data.models.RideRequest
+import com.alicasts.december24.data.models.RideResponse
+import com.alicasts.december24.data.repository.RideOptionsRepository
 import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
 import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
 import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
@@ -27,29 +27,29 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
-open class TravelOptionsViewModel @Inject constructor(
-    private val repository: TravelOptionsRepository,
+open class RideOptionsViewModel @Inject constructor(
+    private val repository: RideOptionsRepository,
     stringResourceProvider: StringResourceProvider
 ) : ViewModel() {
 
-    val _travelRequest = MutableLiveData<TravelRequest>()
-    val travelRequest: LiveData<TravelRequest> = _travelRequest
+    val _rideRequest = MutableLiveData<RideRequest>()
+    val rideRequest: LiveData<RideRequest> = _rideRequest
 
-    val _state = MutableLiveData<Resource<TravelResponse>>()
-    val state: LiveData<Resource<TravelResponse>> = _state
+    val _state = MutableLiveData<Resource<RideResponse>>()
+    val state: LiveData<Resource<RideResponse>> = _state
 
     private val _submitState = MutableLiveData<Resource<ConfirmRideResponse>?>()
     val submitState: LiveData<Resource<ConfirmRideResponse>?> = _submitState
 
     private val unknownErrorMessage = stringResourceProvider.getString(R.string.unknown_error)
 
-    fun fetchTravelOptions(jsonAsString: String) {
+    fun fetchRideOptions(jsonAsString: String) {
         viewModelScope.launch {
             _state.value = Resource.Loading()
 
             try {
-                val travelResponse = repository.getTravelOptions(jsonAsString)
-                _state.value = Resource.Success(travelResponse)
+                val rideResponse = repository.getRideOptions(jsonAsString)
+                _state.value = Resource.Success(rideResponse)
             } catch (e: Exception) {
                 e.printStackTrace()
                 _state.value = e.message?.let { Resource.Error(it) }
@@ -57,15 +57,15 @@ open class TravelOptionsViewModel @Inject constructor(
         }
     }
 
-    fun parseTravelRequest(json: String) {
+    fun parseRideRequest(json: String) {
         try {
             val jsonObject = JSONObject(Uri.decode(json))
-            val travelRequest = TravelRequest(
+            val rideRequest = RideRequest(
                 customerId = jsonObject.optString(CUSTOMER_ID),
                 origin = jsonObject.optString(ORIGIN),
                 destination = jsonObject.optString(DESTINATION)
             )
-            _travelRequest.value = travelRequest
+            _rideRequest.value = rideRequest
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -77,13 +77,13 @@ open class TravelOptionsViewModel @Inject constructor(
         driverOption: DriverOption
     ) {
         viewModelScope.launch {
-            val travelRequest = _travelRequest.value ?: return@launch
+            val rideRequest = _rideRequest.value ?: return@launch
             _submitState.value = Resource.Loading()
             try {
                 val response = repository.submitRideRequest(
-                    customerId = travelRequest.customerId,
-                    origin = travelRequest.origin,
-                    destination = travelRequest.destination,
+                    customerId = rideRequest.customerId,
+                    origin = rideRequest.origin,
+                    destination = rideRequest.destination,
                     distance = distance,
                     duration = duration,
                     driverOption = driverOption
@@ -125,18 +125,18 @@ open class TravelOptionsViewModel @Inject constructor(
         return PolyUtil.encode(coordinates)
     }
 
-    fun returnTravelHistoryRoute(nullString: String): String? {
-        val travelRequest = travelRequest.value
+    fun returnRideHistoryRoute(nullString: String): String? {
+        val rideRequest = rideRequest.value
         val currentState = state.value
 
-        if (travelRequest == null || currentState !is Resource.Success) {
+        if (rideRequest == null || currentState !is Resource.Success) {
             return null
         }
 
         val driverId = currentState.data?.options?.firstOrNull()?.id.toString()
 
         return buildRideHistoryRoute(
-            customerId = travelRequest.customerId,
+            customerId = rideRequest.customerId,
             driverId = driverId,
             nullString = nullString
         )

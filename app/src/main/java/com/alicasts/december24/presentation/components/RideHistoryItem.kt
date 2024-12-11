@@ -17,7 +17,7 @@ import com.alicasts.december24.data.models.HistoryResponseDriver
 import com.alicasts.december24.data.models.Ride
 
 @Composable
-fun RideItem(ride: Ride) {
+fun RideHistoryItem(ride: Ride) {
     val dateLabelString = stringResource(R.string.date_label)
     val originLabelString = stringResource(R.string.origin_label)
     val destinationLabelString = stringResource(R.string.destination_label)
@@ -56,6 +56,6 @@ fun RideItemPreview() {
     )
 
     MaterialTheme {
-        RideItem(ride = mockRide)
+        RideHistoryItem(ride = mockRide)
     }
 }

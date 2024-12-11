@@ -1,4 +1,4 @@
-package com.alicasts.december24.presentation.travel_request_screen
+package com.alicasts.december24.presentation.ride_request_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,14 +23,14 @@ import com.alicasts.december24.presentation.components.DropdownMenuField
 import com.alicasts.december24.presentation.components.ElevatedCustomButton
 
 @Composable
-fun TravelRequestScreen(
+fun RideRequestScreen(
     navController: NavController,
-    viewModel: TravelRequestViewModel = hiltViewModel()
+    viewModel: RideRequestViewModel = hiltViewModel()
 ) {
     val userIds by viewModel.userIds.observeAsState(emptyList())
     val addresses by viewModel.addresses.observeAsState(emptyList())
 
-    val travelRequestString = stringResource(R.string.travel_request)
+    val rideRequestString = stringResource(R.string.ride_request)
     val selectUserIdString = stringResource(R.string.select_user_id)
     val selectOriginAddressString = stringResource(R.string.select_origin_address)
     val selectDestinationAddressString = stringResource(R.string.select_destination_address)
@@ -48,7 +48,7 @@ fun TravelRequestScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = travelRequestString,
+            text = rideRequestString,
             style = MaterialTheme.typography.headlineMedium
         )
 
@@ -75,7 +75,7 @@ fun TravelRequestScreen(
 
         ElevatedCustomButton(
             onClick = {
-                val route = viewModel.buildRouteStringWithTravelRequestJson(
+                val route = viewModel.buildRouteStringWithRideRequestJson(
                     userId = selectedUserId,
                     origin = selectedOrigin,
                     destination = selectedDestination

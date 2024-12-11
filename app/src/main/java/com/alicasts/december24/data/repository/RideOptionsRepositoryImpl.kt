@@ -4,7 +4,7 @@ import com.alicasts.december24.data.models.ConfirmRideRequest
 import com.alicasts.december24.data.models.ConfirmRideResponse
 import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.HistoryResponseDriver
-import com.alicasts.december24.data.models.TravelResponse
+import com.alicasts.december24.data.models.RideResponse
 import com.alicasts.december24.data.remote.RidesApi
 import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
 import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
@@ -14,12 +14,12 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class TravelOptionsRepositoryImpl @Inject constructor(
+class RideOptionsRepositoryImpl @Inject constructor(
     private val api: RidesApi
-) : TravelOptionsRepository {
+) : RideOptionsRepository {
 
-    override suspend fun getTravelOptions(jsonAsString: String): TravelResponse {
-        val (customerId, origin, destination) = parseTravelOptionsRequestJson(jsonAsString)
+    override suspend fun getRideOptions(jsonAsString: String): RideResponse {
+        val (customerId, origin, destination) = parseRideOptionsRequestJson(jsonAsString)
         val requestBody = buildRequestBody(
             customerId = customerId,
             origin = origin,
@@ -27,7 +27,7 @@ class TravelOptionsRepositoryImpl @Inject constructor(
         )
 
         return try {
-            api.getTravelOptions(requestBody)
+            api.getRideOptions(requestBody)
         } catch (e: HttpException) {
             throw Exception(handleHttpException(e))
         } catch (e: Exception) {
@@ -35,7 +35,7 @@ class TravelOptionsRepositoryImpl @Inject constructor(
         }
     }
 
-    private fun parseTravelOptionsRequestJson(json: String): Triple<String, String, String> {
+    private fun parseRideOptionsRequestJson(json: String): Triple<String, String, String> {
         val jsonObject = JSONObject(json)
         val customerId = jsonObject.getString(CUSTOMER_ID)
         val origin = jsonObject.getString(ORIGIN)

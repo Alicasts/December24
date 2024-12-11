@@ -1,10 +1,8 @@
-package com.alicasts.december24.presentation.travel_request_screen
+package com.alicasts.december24.presentation.ride_request_screen
 
-import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
-import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_OPTIONS
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,17 +13,17 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 
 @ExperimentalCoroutinesApi
-class TravelRequestViewModelTest {
+class RideRequestViewModelTest {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: TravelRequestViewModel
+    private lateinit var viewModel: RideRequestViewModel
 
     @Before
     fun setUp() {
         val fakeStringResourceProvider = FakeStringResourceProvider()
-        viewModel = TravelRequestViewModel(fakeStringResourceProvider)
+        viewModel = RideRequestViewModel(fakeStringResourceProvider)
     }
 
     @Test

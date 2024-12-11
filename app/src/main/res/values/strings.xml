@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">December 24</string>
     <string name="request_ride_history">Histórico de viagens</string>
-    <string name="travel_options">Opções de viagem</string>
-    <string name="travel_request">Solicitação de Viagem</string>
+    <string name="ride_options">Opções de viagem</string>
+    <string name="ride_request">Solicitação de Viagem</string>
     <string name="select_user_id">Selecione o ID do Usuário</string>
     <string name="select_driver_id">Selecione o Driver ID</string>
     <string name="select_origin_address">Selecione o Endereço de Origem</string>

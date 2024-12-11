@@ -1,6 +1,6 @@
 package com.alicasts.december24.data.models
 
-data class TravelResponse(
+data class RideResponse(
     val origin: Location,
     val destination: Location,
     val distance: Int,

@@ -1,4 +1,4 @@
-package com.alicasts.december24.presentation.travel_options_screen
+package com.alicasts.december24.presentation.ride_options_screen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -6,9 +6,9 @@ import com.alicasts.december24.data.models.ConfirmRideResponse
 import com.alicasts.december24.data.models.DriverOption
 import com.alicasts.december24.data.models.Location
 import com.alicasts.december24.data.models.Review
-import com.alicasts.december24.data.models.TravelRequest
-import com.alicasts.december24.data.models.TravelResponse
-import com.alicasts.december24.data.repository.TravelOptionsRepository
+import com.alicasts.december24.data.models.RideRequest
+import com.alicasts.december24.data.models.RideResponse
+import com.alicasts.december24.data.repository.RideOptionsRepository
 import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
 import com.alicasts.december24.utils.Resource
 import io.mockk.coEvery
@@ -32,13 +32,13 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class TravelOptionsViewModelTest {
+class RideOptionsViewModelTest {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: TravelOptionsViewModel
-    private val repository = mockk<TravelOptionsRepository>()
+    private lateinit var viewModel: RideOptionsViewModel
+    private val repository = mockk<RideOptionsRepository>()
     private val testDispatcher = UnconfinedTestDispatcher()
     private val stringResourceProvider = FakeStringResourceProvider()
 
@@ -46,7 +46,7 @@ class TravelOptionsViewModelTest {
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
 
-        viewModel = spyk(TravelOptionsViewModel(repository, stringResourceProvider))
+        viewModel = spyk(RideOptionsViewModel(repository, stringResourceProvider))
     }
 
     @After
@@ -55,8 +55,8 @@ class TravelOptionsViewModelTest {
     }
 
     @Test
-    fun `fetchTravelOptions should post Loading and then Success`() = runTest {
-        val mockResponse = TravelResponse(
+    fun `fetchRideOptions should post Loading and then Success`() = runTest {
+        val mockResponse = RideResponse(
             origin = mockk(),
             destination = mockk(),
             distance = 1000,
@@ -66,13 +66,13 @@ class TravelOptionsViewModelTest {
         )
         val mockJson = """{"customer_id":"customer1","origin":"origin1","destination":"destination1"}"""
 
-        coEvery { repository.getTravelOptions(mockJson) } returns mockResponse
-        every { viewModel["parseTravelRequest"](mockJson) } returns Triple("customer1", "origin1", "destination1")
+        coEvery { repository.getRideOptions(mockJson) } returns mockResponse
+        every { viewModel["parseRideRequest"](mockJson) } returns Triple("customer1", "origin1", "destination1")
 
-        val observer = mockk<Observer<Resource<TravelResponse>>>(relaxed = true)
+        val observer = mockk<Observer<Resource<RideResponse>>>(relaxed = true)
         viewModel.state.observeForever(observer)
 
-        viewModel.fetchTravelOptions(mockJson)
+        viewModel.fetchRideOptions(mockJson)
 
         verifySequence {
             observer.onChanged(match { it is Resource.Loading })
@@ -83,18 +83,18 @@ class TravelOptionsViewModelTest {
     }
 
     @Test
-    fun `fetchTravelOptions should post Loading and then Error`() = runTest {
+    fun `fetchRideOptions should post Loading and then Error`() = runTest {
         val errorMessage = "An error occurred"
         val mockJson = """{"customer_id":"customer1","origin":"origin1","destination":"destination1"}"""
 
-        coEvery { repository.getTravelOptions(mockJson) } throws Exception(errorMessage)
+        coEvery { repository.getRideOptions(mockJson) } throws Exception(errorMessage)
 
-        every { viewModel["parseTravelRequest"](mockJson) } returns Triple("customer1", "origin1", "destination1")
+        every { viewModel["parseRideRequest"](mockJson) } returns Triple("customer1", "origin1", "destination1")
 
-        val observer = mockk<Observer<Resource<TravelResponse>>>(relaxed = true)
+        val observer = mockk<Observer<Resource<RideResponse>>>(relaxed = true)
         viewModel.state.observeForever(observer)
 
-        viewModel.fetchTravelOptions(mockJson)
+        viewModel.fetchRideOptions(mockJson)
 
         verifySequence {
             observer.onChanged(match { it is Resource.Loading })
@@ -119,8 +119,8 @@ class TravelOptionsViewModelTest {
 
     @Test
     fun `returnTravelHistoryRoute should return route when data is valid`() {
-        val travelRequest = TravelRequest("customer1", "origin1", "destination1")
-        val mockResponse = TravelResponse(
+        val rideRequest = RideRequest("customer1", "origin1", "destination1")
+        val mockResponse = RideResponse(
             origin = mockk(),
             destination = mockk(),
             distance = 1000,
@@ -135,10 +135,10 @@ class TravelOptionsViewModelTest {
             )),
             routeResponse = null
         )
-        viewModel._travelRequest.postValue(travelRequest)
+        viewModel._rideRequest.postValue(rideRequest)
         viewModel._state.postValue(Resource.Success(mockResponse))
 
-        val route = viewModel.returnTravelHistoryRoute("nullString")
+        val route = viewModel.returnRideHistoryRoute("nullString")
 
         assertNotNull(route)
         assertTrue(route!!.contains("customer1"))
@@ -147,7 +147,7 @@ class TravelOptionsViewModelTest {
 
     @Test
     fun `returnTravelHistoryRoute should return null when data is invalid`() {
-        val route = viewModel.returnTravelHistoryRoute("nullString")
+        val route = viewModel.returnRideHistoryRoute("nullString")
         assertNull(route)
     }
 

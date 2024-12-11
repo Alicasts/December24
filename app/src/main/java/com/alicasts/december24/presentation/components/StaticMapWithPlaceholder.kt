@@ -24,13 +24,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.alicasts.december24.R
 import com.alicasts.december24.data.models.Location
-import com.alicasts.december24.presentation.travel_options_screen.TravelOptionsViewModel
+import com.alicasts.december24.presentation.ride_options_screen.RideOptionsViewModel
 
 @Composable
 fun StaticMapWithPlaceholder(
     origin: Location,
     destination: Location,
-    viewModel: TravelOptionsViewModel = hiltViewModel(),
+    viewModel: RideOptionsViewModel = hiltViewModel(),
     modifier: Modifier = Modifier
 ) {
     val mapUrl = remember { viewModel.buildStaticMapUrl(origin, destination) }

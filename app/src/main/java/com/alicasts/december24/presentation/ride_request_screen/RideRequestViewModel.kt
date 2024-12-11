@@ -1,11 +1,11 @@
-package com.alicasts.december24.presentation.travel_request_screen
+package com.alicasts.december24.presentation.ride_request_screen
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alicasts.december24.R
-import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_OPTIONS
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_OPTIONS
 import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
 import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
 import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
@@ -17,7 +17,7 @@ import org.json.JSONObject
 import javax.inject.Inject
 
 @HiltViewModel
-class TravelRequestViewModel @Inject constructor(
+class RideRequestViewModel @Inject constructor(
     stringResourceProvider: StringResourceProvider
 ) : ViewModel() {
 
@@ -44,7 +44,7 @@ class TravelRequestViewModel @Inject constructor(
         )
     }
 
-    fun buildRouteStringWithTravelRequestJson(
+    fun buildRouteStringWithRideRequestJson(
         userId: String,
         origin: String,
         destination: String
@@ -56,7 +56,7 @@ class TravelRequestViewModel @Inject constructor(
         }.toString()
 
         return buildString {
-            append(TRAVEL_OPTIONS)
+            append(RIDE_OPTIONS)
             append("?json=${Uri.encode(json)}")
         }
     }

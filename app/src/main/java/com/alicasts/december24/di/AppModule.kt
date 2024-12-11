@@ -5,8 +5,8 @@ import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
 import com.alicasts.december24.data.repository.RideHistoryRepository
 import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
-import com.alicasts.december24.data.repository.TravelOptionsRepository
-import com.alicasts.december24.data.repository.TravelOptionsRepositoryImpl
+import com.alicasts.december24.data.repository.RideOptionsRepository
+import com.alicasts.december24.data.repository.RideOptionsRepositoryImpl
 import com.alicasts.december24.utils.DefaultStringResourceProvider
 import com.alicasts.december24.utils.StringResourceProvider
 import dagger.Module
@@ -15,7 +15,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -58,10 +57,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTravelOptionsRepository(
+    fun provideRideOptionsRepository(
         api: RidesApi
-    ): TravelOptionsRepository {
-        return TravelOptionsRepositoryImpl(api)
+    ): RideOptionsRepository {
+        return RideOptionsRepositoryImpl(api)
     }
 
     @Provides

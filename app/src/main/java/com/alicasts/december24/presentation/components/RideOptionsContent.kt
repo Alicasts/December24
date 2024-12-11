@@ -11,11 +11,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.alicasts.december24.R
 import com.alicasts.december24.data.models.DriverOption
-import com.alicasts.december24.data.models.TravelResponse
+import com.alicasts.december24.data.models.RideResponse
 
 @Composable
-fun TravelOptionsContent(
-    response: TravelResponse,
+fun RideOptionsContent(
+    response: RideResponse,
     origin: String,
     destination: String,
     onOptionSelected: (DriverOption) -> Unit
@@ -31,7 +31,7 @@ fun TravelOptionsContent(
         if (response.options.isEmpty()) {
             EmptyStateMessage(noDriversMessage)
         } else {
-            TravelDetails(
+            RideDetails(
                 origin = origin,
                 destination = destination,
                 distance = response.distance.toString(),
@@ -50,7 +50,7 @@ fun TravelOptionsContent(
 }
 
 @Composable
-fun TravelDetails(
+fun RideDetails(
     origin: String,
     destination: String,
     distance: String,
