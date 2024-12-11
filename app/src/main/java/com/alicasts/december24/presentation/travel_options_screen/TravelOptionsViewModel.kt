@@ -32,10 +32,10 @@ open class TravelOptionsViewModel @Inject constructor(
     stringResourceProvider: StringResourceProvider
 ) : ViewModel() {
 
-    private val _travelRequest = MutableLiveData<TravelRequest>()
+    val _travelRequest = MutableLiveData<TravelRequest>()
     val travelRequest: LiveData<TravelRequest> = _travelRequest
 
-    private val _state = MutableLiveData<Resource<TravelResponse>>()
+    val _state = MutableLiveData<Resource<TravelResponse>>()
     val state: LiveData<Resource<TravelResponse>> = _state
 
     private val _submitState = MutableLiveData<Resource<ConfirmRideResponse>?>()
