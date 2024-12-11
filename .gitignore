@@ -1,2 +1,3 @@
 local.properties
 .gradle
+app/src/main/java/com/alicasts/december24/utils/Secrets.kt
