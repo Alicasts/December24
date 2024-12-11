@@ -52,7 +52,7 @@ class RideHistoryRequestViewModelTest {
         val customerId = "CT01"
         val driverId = "Driver123"
 
-        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+        val result = viewModel.returnRideHistoryRoute(customerId, driverId)
 
         assertEquals("$RIDE_HISTORY_RESPONSE/$customerId?driver_id=$driverId", result)
     }
@@ -62,7 +62,7 @@ class RideHistoryRequestViewModelTest {
         val customerId = "CT01"
         val driverId = null
 
-        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+        val result = viewModel.returnRideHistoryRoute(customerId, driverId)
 
         assertEquals("$RIDE_HISTORY_RESPONSE/$customerId", result)
     }
@@ -72,7 +72,7 @@ class RideHistoryRequestViewModelTest {
         val customerId = "CT01"
         val driverId = "Null"
 
-        val result = viewModel.buildRideHistoryRoute(customerId, driverId)
+        val result = viewModel.returnRideHistoryRoute(customerId, driverId)
 
         assertEquals("$RIDE_HISTORY_RESPONSE/$customerId", result)
     }
