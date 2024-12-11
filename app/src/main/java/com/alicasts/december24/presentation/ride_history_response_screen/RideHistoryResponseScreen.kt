@@ -16,7 +16,7 @@ import com.alicasts.december24.R
 import com.alicasts.december24.presentation.components.EmptyStateMessage
 import com.alicasts.december24.presentation.components.ErrorMessage
 import com.alicasts.december24.presentation.components.LoadingIndicator
-import com.alicasts.december24.presentation.components.RideHistoryItem
+import com.alicasts.december24.presentation.ride_history_response_screen.components.RideHistoryItem
 import com.alicasts.december24.utils.Resource
 
 @Composable

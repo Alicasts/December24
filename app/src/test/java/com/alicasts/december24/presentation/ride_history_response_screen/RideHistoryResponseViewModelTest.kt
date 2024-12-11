@@ -2,9 +2,9 @@ package com.alicasts.december24.presentation.ride_history_response_screen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.alicasts.december24.data.models.HistoryResponseDriver
-import com.alicasts.december24.data.models.Ride
-import com.alicasts.december24.data.repository.RideHistoryRepository
+import com.alicasts.december24.data.models.shared.HistoryResponseDriver
+import com.alicasts.december24.data.models.ride_history.Ride
+import com.alicasts.december24.data.repository.ride_history.interfaces.RideHistoryRepository
 import com.alicasts.december24.utils.Resource
 import io.mockk.coEvery
 import io.mockk.mockk

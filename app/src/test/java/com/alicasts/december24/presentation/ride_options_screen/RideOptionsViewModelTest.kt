@@ -2,13 +2,13 @@ package com.alicasts.december24.presentation.ride_options_screen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.alicasts.december24.data.models.ConfirmRideResponse
-import com.alicasts.december24.data.models.DriverOption
-import com.alicasts.december24.data.models.Location
-import com.alicasts.december24.data.models.Review
-import com.alicasts.december24.data.models.RideRequest
-import com.alicasts.december24.data.models.RideResponse
-import com.alicasts.december24.data.repository.RideOptionsRepository
+import com.alicasts.december24.data.models.confirm_ride.ConfirmRideResponse
+import com.alicasts.december24.data.models.shared.DriverOption
+import com.alicasts.december24.data.models.shared.Location
+import com.alicasts.december24.data.models.shared.Review
+import com.alicasts.december24.data.models.shared.RideRequest
+import com.alicasts.december24.data.models.ride_options.RideResponse
+import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptionsRepository
 import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
 import com.alicasts.december24.utils.Resource
 import io.mockk.coEvery
@@ -125,14 +125,16 @@ class RideOptionsViewModelTest {
             destination = mockk(),
             distance = 1000,
             duration = "10 min",
-            options = listOf(DriverOption(
+            options = listOf(
+                DriverOption(
                 1,
                 "Dean Winchester",
                 "hmmm",
                 vehicle = "Impala 68",
                 review = Review(rating = 4, comment = "ee"),
                 value = 88.88
-            )),
+            )
+            ),
             routeResponse = null
         )
         viewModel._rideRequest.postValue(rideRequest)

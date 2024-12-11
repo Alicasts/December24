@@ -3,10 +3,10 @@ package com.alicasts.december24.di
 import android.content.Context
 import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
-import com.alicasts.december24.data.repository.RideHistoryRepository
-import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
-import com.alicasts.december24.data.repository.RideOptionsRepository
-import com.alicasts.december24.data.repository.RideOptionsRepositoryImpl
+import com.alicasts.december24.data.repository.ride_history.interfaces.RideHistoryRepository
+import com.alicasts.december24.data.repository.ride_history.implementations.RideHistoryRepositoryImpl
+import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptionsRepository
+import com.alicasts.december24.data.repository.ride_options.implementation.RideOptionsRepositoryImpl
 import com.alicasts.december24.utils.DefaultStringResourceProvider
 import com.alicasts.december24.utils.StringResourceProvider
 import dagger.Module
@@ -58,9 +58,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRideOptionsRepository(
-        api: RidesApi
+        api: RidesApi,
+        stringResourceProvider: StringResourceProvider
     ): RideOptionsRepository {
-        return RideOptionsRepositoryImpl(api)
+        return RideOptionsRepositoryImpl(api, stringResourceProvider)
     }
 
     @Provides

@@ -12,11 +12,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.alicasts.december24.R
-import com.alicasts.december24.data.models.DriverOption
-import com.alicasts.december24.presentation.components.ConfirmRidePopup
+import com.alicasts.december24.data.models.shared.DriverOption
+import com.alicasts.december24.presentation.ride_options_screen.components.ConfirmRidePopup
 import com.alicasts.december24.presentation.components.ErrorMessage
 import com.alicasts.december24.presentation.components.LoadingIndicator
-import com.alicasts.december24.presentation.components.RideOptionsContent
+import com.alicasts.december24.presentation.ride_options_screen.components.RideOptionsContent
 import com.alicasts.december24.utils.Resource
 
 
