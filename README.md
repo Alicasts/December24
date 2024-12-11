@@ -38,12 +38,13 @@ As part of this project, I utilized a bit of agile methodologies to organize the
 * Configuration for Google Maps API:
 
   To integrate Google Maps into your application, follow these steps to securely add the API Key:
-1. Create a Secrets Object Inside the utils package
+1. Create a Secrets Object Inside the utils package 
 2. create an object named Secrets
 3. Define your API Key in the Secrets object using the following format:
 
    const val GOOGLE_MAPS_API_KEY = YOUR_API_KEY
 4. Replace YOUR_API_KEY with the actual API Key obtained from the Google Cloud Console.
+   (not a good approach but...)
 
 **Project Structure**
 
