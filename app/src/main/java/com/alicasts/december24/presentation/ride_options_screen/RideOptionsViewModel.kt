@@ -15,6 +15,7 @@ import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptio
 import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
 import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATION
 import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
+import com.alicasts.december24.utils.Constants.VALID_DRIVERS
 import com.alicasts.december24.utils.Resource
 import com.alicasts.december24.utils.Secrets.GOOGLE_MAPS_API_KEY
 import com.alicasts.december24.utils.StringResourceProvider
@@ -129,6 +130,15 @@ open class RideOptionsViewModel @Inject constructor(
             driverId = driverId,
             nullString = nullString
         )
+    }
+
+    fun getFilteredDrivers(options: List<DriverOption>, distanceInKm: Double): List<DriverOption> {
+        return options.filter { driverOption ->
+            val matchingDriver = VALID_DRIVERS.find { it.driverId == driverOption.id }
+            matchingDriver?.minKm?.let { minKm ->
+                distanceInKm >= minKm
+            } ?: false
+        }
     }
 }
 

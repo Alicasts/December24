@@ -18,6 +18,7 @@ import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verify
 import io.mockk.verifySequence
+import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertNull
 import junit.framework.TestCase.assertTrue
@@ -127,14 +128,7 @@ class RideOptionsViewModelTest {
             distance = 1000,
             duration = "10 min",
             options = listOf(
-                DriverOption(
-                1,
-                "Dean Winchester",
-                "hmmm",
-                vehicle = "Impala 68",
-                review = Review(rating = 4, comment = "ee"),
-                value = 88.88
-            )
+                createDriverOption(id = 1)
             ),
             routeResponse = null
         )
@@ -167,5 +161,67 @@ class RideOptionsViewModelTest {
         assertTrue(url.contains("markers=color:red|label:B|2.0,2.0"))
         assertTrue(url.contains("path=color:0xff0000ff|weight:5|1.0,1.0|2.0,2.0"))
         assertTrue(url.endsWith("&key=$GOOGLE_MAPS_API_KEY"))
+    }
+
+    @Test
+    fun `getFilteredDrivers should return drivers with minKm less than or equal to distance`() {
+        val options = listOf(
+            createDriverOption(id = 1),
+            createDriverOption(id = 2),
+            createDriverOption(id = 3)
+        )
+
+        val distanceInKm = 6.0
+
+        val result = viewModel.getFilteredDrivers(options, distanceInKm)
+
+        val expected = listOf(
+            createDriverOption(id = 1),
+            createDriverOption(id = 2)
+        )
+
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun `getFilteredDrivers should return empty list when no drivers match the criteria`() {
+        val options = listOf(
+            createDriverOption(id = 1),
+            createDriverOption(id = 2)
+        )
+
+        val distanceInKm = 0.5
+
+        val result = viewModel.getFilteredDrivers(options, distanceInKm)
+
+        assertEquals(emptyList<DriverOption>(), result)
+    }
+
+    @Test
+    fun `getFilteredDrivers should handle empty options list`() {
+        val options = emptyList<DriverOption>()
+        val distanceInKm = 5.0
+
+        val result = viewModel.getFilteredDrivers(options, distanceInKm)
+
+        assertEquals(emptyList<DriverOption>(), result)
+    }
+
+    private fun createDriverOption(
+        id: Int,
+        name: String = "Driver $id",
+        description: String = "Description $id",
+        vehicle: String = "Vehicle $id",
+        review: Review = Review(id, "$id"),
+        value: Double = id * 10.0
+    ): DriverOption {
+        return DriverOption(
+            id = id,
+            name = name,
+            description = description,
+            vehicle = vehicle,
+            review = review,
+            value = value
+        )
     }
 }

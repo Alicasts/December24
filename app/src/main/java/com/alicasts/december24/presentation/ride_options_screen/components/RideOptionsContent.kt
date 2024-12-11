@@ -9,18 +9,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.alicasts.december24.R
-import com.alicasts.december24.data.models.shared.DriverOption
 import com.alicasts.december24.data.models.ride_options.RideResponse
+import com.alicasts.december24.data.models.shared.DriverOption
 import com.alicasts.december24.presentation.components.EmptyStateMessage
+import com.alicasts.december24.presentation.ride_options_screen.RideOptionsViewModel
 
 @Composable
 fun RideOptionsContent(
+    viewModel: RideOptionsViewModel = hiltViewModel(),
     response: RideResponse,
     origin: String,
     destination: String,
     onOptionSelected: (DriverOption) -> Unit
 ) {
+    val distanceInKm = response.distance / 1000.0
+    val filteredOptions = viewModel.getFilteredDrivers(response.options, distanceInKm)
+
     val noDriversMessage = stringResource(R.string.successful_response_no_drivers)
 
     Column(
@@ -43,7 +49,7 @@ fun RideOptionsContent(
                 destination = response.destination
             )
             DriverOptionsList(
-                options = response.options,
+                options = filteredOptions,
                 onSelected = onOptionSelected
             )
         }
