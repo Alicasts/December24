@@ -11,6 +11,7 @@ import com.alicasts.december24.data.models.ride_options.RideResponse
 import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptionsRepository
 import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
 import com.alicasts.december24.utils.Resource
+import com.alicasts.december24.utils.Secrets.GOOGLE_MAPS_API_KEY
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
@@ -160,8 +161,11 @@ class RideOptionsViewModelTest {
 
         val url = viewModel.buildStaticMapUrl(origin, destination)
 
-        assertTrue(url.startsWith("https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/"))
-        assertTrue(url.contains("pin-s-a+9ed4bd(1.0,1.0)"))
-        assertTrue(url.contains("pin-s-b+000(2.0,2.0)"))
+        assertTrue(url.startsWith("https://maps.googleapis.com/maps/api/staticmap?"))
+        assertTrue(url.contains("size=600x400"))
+        assertTrue(url.contains("markers=color:blue|label:A|1.0,1.0"))
+        assertTrue(url.contains("markers=color:red|label:B|2.0,2.0"))
+        assertTrue(url.contains("path=color:0xff0000ff|weight:5|1.0,1.0|2.0,2.0"))
+        assertTrue(url.endsWith("&key=$GOOGLE_MAPS_API_KEY"))
     }
 }

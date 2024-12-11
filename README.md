@@ -24,7 +24,7 @@ As part of this project, I utilized a bit of agile methodologies to organize the
 * Libraries:
    *    Retrofit (for API calls)
    *    Hilt (for dependency injection)
-   *    Mapbox (for maps and routes)
+   *    Google Maps API (for maps and routes)
 * Testing: JUnit4, Espresso
 * Others: Gradle for dependency management
 
@@ -34,7 +34,14 @@ As part of this project, I utilized a bit of agile methodologies to organize the
    * Make sure Android Studio is installed.
    * Configure the Android SDK.
    * Use Java 11.
-* Add the Mapbox key (if applicable): Replace MAPBOX_API_KEY in the utils.Secret file for a valid one.
+
+* Configuration for Google Maps API:
+To enable Google Maps in the application, you need to add an API Key to the project:
+1. Open the app/src/main/java/com/alicasts/december24/utils/Secrets.kt
+ 
+2. Add your API Key in the following format:
+
+   const val GOOGLE_MAPS_API_KEY = YOUR_API_KEY
 
 **Project Structure**
 
