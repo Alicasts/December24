@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.alicasts.december24"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.alicasts.december24"
