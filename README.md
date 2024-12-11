@@ -37,10 +37,11 @@ As part of this project, I utilized a bit of agile methodologies to organize the
 
 * Configuration for Google Maps API:
 To enable Google Maps in the application, you need to add an API Key to the project:
-1. Open the `local.properties` file in the root of the project.
+1. Open the app/src/main/java/com/alicasts/december24/utils/Secrets.kt
+ 
 2. Add your API Key in the following format:
-   ```properties
-   GOOGLE_MAPS_API_KEY=YOUR_API_KEY
+
+   const val GOOGLE_MAPS_API_KEY = YOUR_API_KEY
 
 **Project Structure**
 
