@@ -36,12 +36,14 @@ As part of this project, I utilized a bit of agile methodologies to organize the
    * Use Java 11.
 
 * Configuration for Google Maps API:
-To enable Google Maps in the application, you need to add an API Key to the project:
-1. Open the app/src/main/java/com/alicasts/december24/utils/Secrets.kt
- 
-2. Add your API Key in the following format:
+
+  To integrate Google Maps into your application, follow these steps to securely add the API Key:
+1. Create a Secrets Object Inside the utils package
+2. create an object named Secrets
+3. Define your API Key in the Secrets object using the following format:
 
    const val GOOGLE_MAPS_API_KEY = YOUR_API_KEY
+4. Replace YOUR_API_KEY with the actual API Key obtained from the Google Cloud Console.
 
 **Project Structure**
 
