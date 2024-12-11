@@ -1,9 +1,9 @@
 package com.alicasts.december24.data.remote
 
-import com.alicasts.december24.data.models.ConfirmRideRequest
-import com.alicasts.december24.data.models.ConfirmRideResponse
-import com.alicasts.december24.data.models.RideHistoryResponse
-import com.alicasts.december24.data.models.TravelResponse
+import com.alicasts.december24.data.models.confirm_ride.ConfirmRideRequest
+import com.alicasts.december24.data.models.confirm_ride.ConfirmRideResponse
+import com.alicasts.december24.data.models.ride_history.RideHistoryResponse
+import com.alicasts.december24.data.models.ride_options.RideResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -15,9 +15,9 @@ interface RidesApi {
     suspend fun getRide(@Url url: String): RideHistoryResponse
 
     @POST("ride/estimate")
-    suspend fun getTravelOptions(
+    suspend fun getRideOptions(
         @Body request: Map<String, String>
-    ): TravelResponse
+    ): RideResponse
 
     @PATCH("ride/confirm")
     suspend fun confirmRide(

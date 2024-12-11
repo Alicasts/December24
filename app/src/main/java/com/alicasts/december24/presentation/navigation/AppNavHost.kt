@@ -11,12 +11,14 @@ import com.alicasts.december24.presentation.CenteredButtons
 import com.alicasts.december24.presentation.navigation.Routes.HOME
 import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_REQUEST
 import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPONSE
-import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_REQUEST
-import com.alicasts.december24.presentation.navigation.Routes.TRAVEL_OPTIONS
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_REQUEST
+import com.alicasts.december24.presentation.navigation.Routes.RIDE_OPTIONS
+import com.alicasts.december24.presentation.navigation.RoutesArguments.CUSTOMER_ID
+import com.alicasts.december24.presentation.navigation.RoutesArguments.DRIVER_ID
 import com.alicasts.december24.presentation.ride_history_request_screen.RideHistoryRequestScreen
 import com.alicasts.december24.presentation.ride_history_response_screen.RideHistoryResponseScreen
-import com.alicasts.december24.presentation.travel_options_screen.TravelOptionsScreen
-import com.alicasts.december24.presentation.travel_request_screen.TravelRequestScreen
+import com.alicasts.december24.presentation.ride_options_screen.RideOptionsScreen
+import com.alicasts.december24.presentation.ride_request_screen.RideRequestScreen
 
 @Composable
 fun AppNavHost(
@@ -35,22 +37,22 @@ fun AppNavHost(
             RideHistoryRequestScreen(navController = navController)
         }
         composable(
-            route = "${RIDE_HISTORY_RESPONSE}/{customer_id}?driver_id={driver_id}",
+            route = "${RIDE_HISTORY_RESPONSE}/{$CUSTOMER_ID}?$DRIVER_ID={$DRIVER_ID}",
             arguments = listOf(
-                navArgument("customer_id") { type = NavType.StringType },
-                navArgument("driver_id") { type = NavType.StringType; nullable = true }
+                navArgument(CUSTOMER_ID) { type = NavType.StringType },
+                navArgument(DRIVER_ID) { type = NavType.StringType; nullable = true }
             )
         ) { backStackEntry ->
-            val customerId = backStackEntry.arguments?.getString("customer_id").orEmpty()
-            val driverId = backStackEntry.arguments?.getString("driver_id").orEmpty()
+            val customerId = backStackEntry.arguments?.getString(CUSTOMER_ID).orEmpty()
+            val driverId = backStackEntry.arguments?.getString(DRIVER_ID).orEmpty()
 
             RideHistoryResponseScreen(customerId = customerId, driverId = driverId)
         }
-        composable(route = TRAVEL_REQUEST) {
-            TravelRequestScreen(navController = navController)
+        composable(route = RIDE_REQUEST) {
+            RideRequestScreen(navController = navController)
         }
         composable(
-            route = "$TRAVEL_OPTIONS?json={json}",
+            route = "$RIDE_OPTIONS?json={json}",
             arguments = listOf(
                 navArgument("json") {
                     type = NavType.StringType
@@ -59,7 +61,7 @@ fun AppNavHost(
             )
         ) { backStackEntry ->
             val json = backStackEntry.arguments?.getString("json") ?: "{}"
-            TravelOptionsScreen(
+            RideOptionsScreen(
                 navController = navController,
                 requestJsonAsString = json
             )

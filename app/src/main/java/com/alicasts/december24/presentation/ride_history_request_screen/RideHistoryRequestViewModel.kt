@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.alicasts.december24.R
-import com.alicasts.december24.presentation.navigation.Routes.RIDE_HISTORY_RESPONSE
 import com.alicasts.december24.utils.Constants
 import com.alicasts.december24.utils.Constants.VALID_USER_ID
 import com.alicasts.december24.utils.StringResourceProvider

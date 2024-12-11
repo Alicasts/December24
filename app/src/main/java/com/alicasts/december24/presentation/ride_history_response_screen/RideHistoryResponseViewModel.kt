@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alicasts.december24.R
-import com.alicasts.december24.data.models.Ride
-import com.alicasts.december24.data.repository.RideHistoryRepository
+import com.alicasts.december24.data.models.ride_history.Ride
+import com.alicasts.december24.data.repository.ride_history.interfaces.RideHistoryRepository
 import com.alicasts.december24.utils.Resource
-import com.alicasts.december24.utils.StringResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

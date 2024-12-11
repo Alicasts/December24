@@ -3,10 +3,10 @@ package com.alicasts.december24.di
 import android.content.Context
 import com.alicasts.december24.utils.Constants.BASE_URL
 import com.alicasts.december24.data.remote.RidesApi
-import com.alicasts.december24.data.repository.RideHistoryRepository
-import com.alicasts.december24.data.repository.RideHistoryRepositoryImpl
-import com.alicasts.december24.data.repository.TravelOptionsRepository
-import com.alicasts.december24.data.repository.TravelOptionsRepositoryImpl
+import com.alicasts.december24.data.repository.ride_history.interfaces.RideHistoryRepository
+import com.alicasts.december24.data.repository.ride_history.implementations.RideHistoryRepositoryImpl
+import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptionsRepository
+import com.alicasts.december24.data.repository.ride_options.implementation.RideOptionsRepositoryImpl
 import com.alicasts.december24.utils.DefaultStringResourceProvider
 import com.alicasts.december24.utils.StringResourceProvider
 import dagger.Module
@@ -15,7 +15,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -27,11 +26,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
             .build()
     }
 
@@ -54,17 +49,19 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRideHistoryRepository(
-        api: RidesApi
+        api: RidesApi,
+        stringResourceProvider: StringResourceProvider
     ): RideHistoryRepository {
-        return RideHistoryRepositoryImpl(api)
+        return RideHistoryRepositoryImpl(api, stringResourceProvider)
     }
 
     @Provides
     @Singleton
-    fun provideTravelOptionsRepository(
-        api: RidesApi
-    ): TravelOptionsRepository {
-        return TravelOptionsRepositoryImpl(api)
+    fun provideRideOptionsRepository(
+        api: RidesApi,
+        stringResourceProvider: StringResourceProvider
+    ): RideOptionsRepository {
+        return RideOptionsRepositoryImpl(api, stringResourceProvider)
     }
 
     @Provides
