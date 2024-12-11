@@ -1,6 +1,8 @@
 **This is a travel management app developed as part of a code challenge.
 It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.**
 
+![Demo](docs/DemoGif.gif)
+
  **Table of Contents**
 * Features
 * Technologies Used
