@@ -1,6 +1,6 @@
 **This is a travel management app developed as part of a code challenge.
-It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.
-As part of this project, I utilized my knowledge of agile methodologies to organize the development process effectively. I created a Kanban board, implemented a ticket system, and drafted a basic documentation structure on Trello to manage tasks and workflows efficiently. You can view the Trello board here: (link available after the time deadline)**
+It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.  
+As part of this project, I utilized a bit of agile methodologies to organize the development process effectively, creating a Kanban board counting with a sequential ticket system, and drafting a basic documentation structure on Trello to manage tasks and workflows efficiently. You can view the Trello board here: (link available after the time deadline)**
 
 ![Demo](docs/DemoGif.gif)
 
@@ -10,7 +10,7 @@ As part of this project, I utilized my knowledge of agile methodologies to organ
 * Environment Setup
 * How to Run
 * Project Structure
-* Final Notes
+* Final Notes and Personal Considerations
 
 **Features**
 * Request rides with origin and destination.
