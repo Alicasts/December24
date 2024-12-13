@@ -1,6 +1,6 @@
 **This is a travel management app developed as part of a code challenge.
 It allows users to request rides, view their history, and manage travel options accordingly to the code challenge requirements.  
-As part of this project, I utilized a bit of agile methodologies to organize the development process effectively, creating a Kanban board counting with a sequential ticket system, and drafting a basic documentation structure on Trello to manage tasks and workflows efficiently. You can view the Trello board here: (link available after the time deadline)**
+As part of this project, I utilized a bit of agile methodologies to organize the development process effectively, creating a Kanban board counting with a sequential ticket system, and drafting a basic documentation structure on Trello to manage tasks and workflows efficiently. You can view the Trello board here: https://trello.com/b/FzUe3NSd/shopper-android-code-challenge **
 
 ![Demo](docs/DemoGif.gif)
 
