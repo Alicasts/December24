@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alicasts.december24.BuildConfig
 import com.alicasts.december24.R
 import com.alicasts.december24.data.models.confirm_ride.ConfirmRideResponse
 import com.alicasts.december24.data.models.ride_options.RideResponse
@@ -17,7 +18,6 @@ import com.alicasts.december24.presentation.navigation.RoutesArguments.DESTINATI
 import com.alicasts.december24.presentation.navigation.RoutesArguments.ORIGIN
 import com.alicasts.december24.utils.Constants.VALID_DRIVERS
 import com.alicasts.december24.utils.Resource
-import com.alicasts.december24.utils.Secrets.GOOGLE_MAPS_API_KEY
 import com.alicasts.december24.utils.StringResourceProvider
 import com.alicasts.december24.utils.Utils.buildRideHistoryRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -99,6 +99,8 @@ open class RideOptionsViewModel @Inject constructor(
     }
 
     fun buildStaticMapUrl(origin: Location, destination: Location): String {
+        val googleMapsApiKey = BuildConfig.GOOGLE_MAPS_API_KEY
+
         return try {
 
             buildString {
@@ -108,7 +110,7 @@ open class RideOptionsViewModel @Inject constructor(
                 append("&markers=color:red|label:B|${destination.latitude},${destination.longitude}")
                 append("&path=color:0xff0000ff|weight:5|")
                 append("${origin.latitude},${origin.longitude}|${destination.latitude},${destination.longitude}")
-                append("&key=$GOOGLE_MAPS_API_KEY")
+                append("&key=$googleMapsApiKey")
             }
         } catch (e: Exception) {
             e.message ?: ""

@@ -2,6 +2,7 @@ package com.alicasts.december24.presentation.ride_options_screen
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.alicasts.december24.BuildConfig.GOOGLE_MAPS_API_KEY
 import com.alicasts.december24.data.models.confirm_ride.ConfirmRideResponse
 import com.alicasts.december24.data.models.shared.DriverOption
 import com.alicasts.december24.data.models.shared.Location
@@ -11,7 +12,6 @@ import com.alicasts.december24.data.models.ride_options.RideResponse
 import com.alicasts.december24.data.repository.ride_options.interfaces.RideOptionsRepository
 import com.alicasts.december24.presentation.mocks.FakeStringResourceProvider
 import com.alicasts.december24.utils.Resource
-import com.alicasts.december24.utils.Secrets.GOOGLE_MAPS_API_KEY
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
