@@ -1091,7 +1091,7 @@ public class LibrariesForLibsInPluginsBlock extends AbstractExternalDependencyFa
         public Provider<String> getConverterGson() { return getVersion("converterGson"); }
 
         /**
-         * Version alias <b>coreKtx</b> with value <b>1.15.0</b>
+         * Version alias <b>coreKtx</b> with value <b>1.10.1</b>
          * <p>
          * If the version is a rich version and cannot be represented as a
          * single version string, an empty string is returned.
